@@ -25,7 +25,7 @@ public class ServerUDP {
                 DatagramPacket request = new DatagramPacket(message, message.length);
                 aSocket.receive(request);
 
-                if (!containsClient(request.getPort())) {
+                if (!containsClient(request)) {
                     clientsUDP.add(request);
                 }
             }
@@ -38,11 +38,13 @@ public class ServerUDP {
     }
 
 
-    private boolean containsClient(int port) {
+    private boolean containsClient(DatagramPacket clientDatagram) {
         boolean contains = false;
-        //TODO: VALIDAR IP/PORT
+        String addressExisting;
+        String address = String.valueOf(clientDatagram.getAddress()) +"/"+ String.valueOf(clientDatagram.getPort());
         for (DatagramPacket client : clientsUDP) {
-            if (client.getPort() == port) {
+            addressExisting = String.valueOf(client.getAddress()) +"/"+ String.valueOf(client.getPort());
+            if (addressExisting.equals(address)) {
                 contains = true;
                 break;
             }

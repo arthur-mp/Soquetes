@@ -22,7 +22,7 @@ public class ServerTCP {
             while (clientsTCP.size() < 2) {
                 // Aceita novo cliente
                 Socket clientSocket = listenSocket.accept();
-                if (!containsClient(clientSocket.getPort())) {
+                if (!containsClient(clientSocket)) {
                     clientsTCP.add(clientSocket);
                 }
             }
@@ -35,11 +35,13 @@ public class ServerTCP {
     }
 
 
-    private boolean containsClient(int port) {
+    private boolean containsClient(Socket clientSocket) {
         boolean contains = false;
-        //TODO: VALIDAR IP/PORT
+        String addressExisting;
+        String address = String.valueOf(clientSocket.getInetAddress()) +"/"+ String.valueOf(clientSocket.getPort());
         for (Socket client : clientsTCP) {
-            if (client.getPort() == port) {
+            addressExisting = String.valueOf(client.getInetAddress()) +"/"+ String.valueOf(client.getPort());
+            if (addressExisting.equals(address)) {
                 contains = true;
                 break;
             }
