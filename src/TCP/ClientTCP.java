@@ -23,7 +23,7 @@ public class ClientTCP implements InOut {
         window = windowParam;
     }
     public void initializeTCPClient(){
-        String host = "127.0.0.1";
+        String host = window.getIpConnection();
         try {
             int serverPort = 7896;
             //Connection

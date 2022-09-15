@@ -22,7 +22,7 @@ public class ClientUDP implements InOut {
     }
 
     public void initializeUDPClient(){
-        String host = "127.0.0.1";
+        String host = window.getIpConnection();
         try {
             aSocket = new DatagramSocket();
             aHost = InetAddress.getByName(host);
