@@ -7,11 +7,12 @@ import UDP.ClientUDP;
 import UDP.ServerUDP;
 import Utils.Window;
 
-import java.io.IOException;
-import java.net.*;
 
 public  class Main implements Aplication {
 
+    /*
+    * Variaveis Estaticas
+    * */
     public static Window window;
 
     public static ClientTCP tcpClient;
@@ -22,10 +23,19 @@ public  class Main implements Aplication {
 
     public static ServerUDP udpServer;
 
+    /*
+    * Inicializa a aplicacao,
+    * e a Jframe nomeada de Window
+    */
     public  static void main(String[] args) {
         window = new Window();
     }
 
+    /*
+    * Call back
+    * Quando clicado em conectar na Jframe
+    * será direcionado para esta funcao
+    */
     @Override
     public  void initialize() {
         initializeAplication(window);
@@ -46,7 +56,7 @@ public  class Main implements Aplication {
 
     /*
      *
-     * Conexão UDP
+     * Conexao UDP
      */
     private  void udpClient(Window window) {
         udpClient = new ClientUDP(window);
@@ -60,7 +70,7 @@ public  class Main implements Aplication {
 
     /*
      *
-     * Conexão TCP
+     * Conexao TCP
      */
     private void tcpClient(Window window) {
         // arguments supply message and hostname
@@ -77,7 +87,8 @@ public  class Main implements Aplication {
 
     /*
      *
-     * Initialize Aplication
+     * Inicializa Aplicacao
+     * com base nas configuracoes informadas pelo usuario na Jfram
      */
     private  void initializeAplication(Window window) {
         if (window.getOptionConnection() == "TCP") {

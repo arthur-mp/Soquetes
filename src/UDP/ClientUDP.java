@@ -8,6 +8,9 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.net.*;
 
+/*
+* Cliente UDP
+*/
 public class ClientUDP implements InOut {
     public  Window window;
 
@@ -21,21 +24,29 @@ public class ClientUDP implements InOut {
         window = windowParam;
     }
 
+    /*
+     * Funcao que efetua o inicio da comunicacao do Cliente
+     */
     public void initializeUDPClient(){
         String host = window.getIpConnection();
         try {
+            //Connection
             aSocket = new DatagramSocket();
             aHost = InetAddress.getByName(host);
 
+            // Envia mensagem ao servidor
+            // Mensagem informando conecao
             byte[] message = {Messages.CONNECTSERVER.getValue()};
 
             DatagramPacket request =
                     new DatagramPacket(message, message.length, aHost, serverPort);
             aSocket.send(request);
 
+            // Aguarda mensagem do servidor
             DatagramPacket reply = new DatagramPacket(message, message.length);
             aSocket.receive(reply);
 
+            // Mensagem inicial diferencia o tipo de cliente
             if (message[0] == Messages.CONNECTCLIENT1.getValue()) {
                 window.isClient("1");
                 window.enableTable();
@@ -54,6 +65,10 @@ public class ClientUDP implements InOut {
             System.out.println("readline:" + e.getMessage());
         }
     }
+
+    /*
+     * Funcao que efetua o recebimento de mensagem
+     */
     @Override
     public  void receive() {
         new Thread(){
@@ -78,6 +93,9 @@ public class ClientUDP implements InOut {
 
     }
 
+    /*
+     * Funcao que efetua o envio de mensagem
+     */
     @Override
     public  void send() {
         try {

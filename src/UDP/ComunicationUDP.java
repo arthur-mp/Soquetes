@@ -7,6 +7,9 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.util.List;
 
+/*
+ * Classe onde a logica do jogo e executada
+ */
 public class ComunicationUDP {
 
     private DatagramSocket aSocket = null;
@@ -22,6 +25,10 @@ public class ComunicationUDP {
 
     private void comunicationClients(){
         try {
+
+            // Servidor enviar mensagem informando aos clientes a ordem de prioridade
+            // e que o jogo iniciou
+
             byte[] messageConection = new byte[]{Messages.CONNECTCLIENT1.getValue()};
 
             DatagramPacket request =

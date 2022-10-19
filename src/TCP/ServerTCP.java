@@ -6,19 +6,29 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+* Servidor TCP
+*/
 public class ServerTCP {
 
     private final int serverPort = 7896;
 
+    /*
+    * Lista de Clientes que realizaram conexao com o servidor
+    */
     private  List<Socket> clientsTCP = new ArrayList<Socket>();
 
     public void initializeTCPServer(){
         try {
+            // Inicializacao do servidor
             int serverPort = 7896; // the server port
             ServerSocket listenSocket = new ServerSocket(serverPort);
             System.out.println("Server TCP Initialized");
 
-            // Connection
+            /*
+            * Conexao
+            * Servidor receber 2 clientes
+            */
             while (clientsTCP.size() < 2) {
                 // Aceita novo cliente
                 Socket clientSocket = listenSocket.accept();
@@ -27,6 +37,10 @@ public class ServerTCP {
                 }
             }
 
+            /*
+            * Apos ter sido realizada a conexao com os 2 clientes
+            * E inicializado a comunicacao de fato
+            */
             ComunicationTCP comunication = new ComunicationTCP(clientsTCP);
 
         } catch (IOException e) {
@@ -35,6 +49,10 @@ public class ServerTCP {
     }
 
 
+    /*
+    * Analisa se o cliente ja se conectou
+    * Ou seja, um cliente pode efetuar apenas uma conexao
+    */
     private boolean containsClient(Socket clientSocket) {
         boolean contains = false;
         String addressExisting;

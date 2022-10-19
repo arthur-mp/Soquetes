@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.*;
 
+/*
+* Classe onde a logica do jogo e executada
+*/
 public class ComunicationTCP {
     DataInputStream inClient1;
     DataOutputStream outClient1;
@@ -31,6 +34,8 @@ public class ComunicationTCP {
             inClient2 = new DataInputStream(clientSocket2.getInputStream());
             outClient2 = new DataOutputStream(clientSocket2.getOutputStream());
 
+            // Servidor enviar mensagem informando aos clientes a ordem de prioridade
+            // e que o jogo iniciou
             outClient1.writeByte(Messages.CONNECTCLIENT1.getValue());
             outClient2.writeByte(Messages.CONNECTCLIENT2.getValue());
 

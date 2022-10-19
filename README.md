@@ -1,6 +1,8 @@
 # Soquetes
 Soquete Aplication TCP/UDP
 
-Documentation
+Trabalho desenvolvido na disciplina de Sistemas Distribuidos, Cefet-MG.
 
-[TP01_Soquetes_Arthur_Morais_Pimentel.pdf](https://github.com/arthur-mp/Soquetes/files/9719548/TP01_Soquetes_Arthur_Morais_Pimentel.pdf)
+Uma aplicação que busca aplicar os protocolos de comunicação TCP/UDP, aplicados em um jogo da velha.
+
+Segue a documentação com mais informações: [Documentação](./files/Documentation.pdf);

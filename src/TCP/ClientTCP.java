@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+/*
+* Cliente TCP
+*/
 public class ClientTCP implements InOut {
 
     public   DataInputStream in;
@@ -22,6 +25,10 @@ public class ClientTCP implements InOut {
     public ClientTCP(Window windowParam){
         window = windowParam;
     }
+
+    /*
+     * Funcao que efetua o inicio da comunicacao do Cliente
+     */
     public void initializeTCPClient(){
         String host = window.getIpConnection();
         try {
@@ -31,6 +38,8 @@ public class ClientTCP implements InOut {
             in = new DataInputStream(s.getInputStream());
             out = new DataOutputStream(s.getOutputStream());
 
+            // mensagem de inicializacao enviado pelo servidor
+            // esta mensagem inicial diferencia o tipo de cliente
             byte message = in.readByte();
 
             if (message == Messages.CONNECTCLIENT1.getValue()) {
@@ -51,6 +60,10 @@ public class ClientTCP implements InOut {
             System.out.println("readline:" + e.getMessage());
         }
     }
+
+    /*
+    * Funcao que efetua o recebimento de mensagem
+    */
     @Override
     public  void receive() {
         new Thread(){
@@ -74,6 +87,9 @@ public class ClientTCP implements InOut {
 
     }
 
+    /*
+     * Funcao que efetua o envio de mensagem
+     */
     @Override
     public  void send() {
         try {
